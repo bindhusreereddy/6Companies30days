@@ -1,0 +1,42 @@
+//You are given an array of strings tokens that represents an arithmetic expression in a Reverse Polish Notation.
+//https://leetcode.com/problems/evaluate-reverse-polish-notation/
+#include<stack>
+class Solution {
+public:
+    int evalRPN(vector<string>& tokens) {
+        stack<int> s;
+        for(int i=0;i<tokens.size();i++)
+        {
+            if((tokens[i] != "+")&&(tokens[i] != "-")&&(tokens[i] != "*")&&(tokens[i] != "/"))
+            {
+                s.push(stoi(tokens[i]));
+            }
+            else
+            {
+                int x=s.top();
+                s.pop();
+                int y=s.top();
+                s.pop();
+                if(tokens[i]=="+")
+                {
+                    s.push(y+x);
+                }
+                if(tokens[i]=="-")
+                {
+                    s.push(y-x);
+                }
+                if(tokens[i]=="*")
+                {
+                    s.push(y*x);
+                }
+                if(tokens[i]=="/")
+                {
+                    s.push(y/x);
+                }
+                
+            }
+            
+        }
+        return s.top();
+    }
+};
