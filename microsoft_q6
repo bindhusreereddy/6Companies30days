@@ -1,0 +1,23 @@
+//Substrings containing all three Characters
+//https://leetcode.com/problems/number-of-substrings-containing-all-three-characters/description/
+class Solution {
+
+public:
+    int numberOfSubstrings(string s) 
+    {
+        int cnt=0;
+        int i=0;//right and left pointers
+        vector<int> v(3,0);
+        for(int j=0; j<s.size(); j++)
+        {
+            v[s[j]-'a']++;
+            while(v[0]>0 && v[1]>0 && v[2]>0 && i<=j)
+            {
+                v[s[i]-'a']--;
+                cnt+=(s.size() - j);
+                i++;
+            }
+        }
+        return cnt;
+    }
+};
