@@ -1,0 +1,21 @@
+//Minimum Consecutive Cards to Pick Up
+//https://leetcode.com/problems/minimum-consecutive-cards-to-pick-up/description/
+class Solution {
+public:
+    int minimumCardPickup(vector<int>& cards) {
+        int n=cards.size();
+        int mini = INT_MAX,flag=0;
+        map<int,int> m;
+        for(int i=0;i<n;i++)
+        {
+            if(!m.empty() && m.find(cards[i])!=m.end())
+            {
+                mini = min(mini,(i-m[cards[i]]+1));
+                flag = 1;
+            }
+            m[cards[i]]=i;
+        }
+        if(flag==1) return mini;
+        else return -1;
+    }
+};
