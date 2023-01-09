@@ -1,0 +1,30 @@
+//Nice Pairs in Array (OTT Platforms and John)
+//https://leetcode.com/problems/count-nice-pairs-in-an-array/
+class Solution {
+    int reverse(int x)
+    {
+        int rev=0;
+        while(x)
+        {
+            rev = (rev*10) + (x%10);
+            x=x/10;
+        }
+        return rev;
+    }
+
+public:
+    int countNicePairs(vector<int>& nums) {
+        int n=nums.size();
+        int M=1e9+7;
+        int result=0;
+        unordered_map<int,int> m;
+        for(int i=n-1;i>=0;i--)
+        {
+            int d = nums[i] - reverse(nums[i]);
+            if(m.count(d)==1) result=(result+m[d])%M;
+            m[d]++;
+        }
+        return result;
+        
+    }
+};
