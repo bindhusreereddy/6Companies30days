@@ -1,0 +1,31 @@
+//Maximum Matrix Sum
+//https://leetcode.com/problems/maximum-matrix-sum/description/
+class Solution {
+public:
+    long long maxMatrixSum(vector<vector<int>>& matrix) {
+
+        long long sum=0,cnt=0;
+        long long mini=LONG_LONG_MAX;
+        for(int i=0;i<matrix.size();i++)
+        {
+            for(int j=0;j<matrix[i].size();j++)
+            {
+                if(matrix[i][j]<0)
+                {
+                    cnt++;
+                    sum=sum-matrix[i][j];
+                    if(-1*matrix[i][j]<mini) mini=-1*matrix[i][j];
+                }
+                else
+                {
+                    sum=sum+matrix[i][j];
+                    if(matrix[i][j]<mini) mini=matrix[i][j];
+                }
+
+            }
+        }
+        if(cnt%2==0) return sum;
+        else return sum-2*mini;
+        
+    }
+};
